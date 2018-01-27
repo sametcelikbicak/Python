@@ -1,0 +1,10 @@
+Öğrenci 1----->FD
+Öğrenci 2----->BA
+Öğrenci 3----->FD
+Öğrenci 4----->FD
+Öğrenci 5----->FD
+Öğrenci 6----->DC
+Öğrenci 7----->FF
+Öğrenci 8----->CB
+Öğrenci 9----->FF
+Öğrenci 10----->FF
