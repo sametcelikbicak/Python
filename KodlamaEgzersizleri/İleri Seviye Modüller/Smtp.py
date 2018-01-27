@@ -1,17 +1,25 @@
 import smtplib
-from email.mime.multipart import  MIMEMultipart
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import sys
 
+gonderen = input("Gönderen Mail Adresi:")
+alici = input("Alıcının Mail Adresi:")
+bilgi = input("Bilgi Mail Adresi:")
+
 mesaj = MIMEMultipart()
-mesaj["From"] = "sametcelikbicak@gmail.com"
-mesaj["Cc"] = "sametcelikbicak@gmail.com"
-mesaj["To"] = "coskun.m.murat@gmail.com"
+mesaj["From"] = gonderen
+mesaj["Cc"] = bilgi
+mesaj["To"] = alici
 mesaj["Subject"] = "Python Smtp İle Mail Gönderme"
 
 yazi = """
 
 Python ve PyCharm ile Smtp üzerinden mail gönderimi
+Ders içeriğindeki gibi sabit değil kullanıcıdan alınan bilgilere
+göre mail gönderimi için düzenlendi.
+
+GitHub:https://github.com/sametcelikbicak/Python/blob/master/KodlamaEgzersizleri/İleri%20Seviye%20Modüller/Smtp.py
 
 Samet ÇELİKBIÇAK
 
