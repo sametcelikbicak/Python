@@ -1,6 +1,7 @@
 import sys
 import os
 from PyQt5.QtWidgets import QWidget,QApplication,QTextEdit,QLabel,QPushButton,QVBoxLayout,QHBoxLayout,QFileDialog
+from PyQt5.QtWidgets import QAction,qApp,QMainWindow,QMenuBar
 
 class Notepad(QWidget):
     def __init__(self):
@@ -27,7 +28,7 @@ class Notepad(QWidget):
         self.temizle.clicked.connect(self.yaziyi_temizle)
         self.ac.clicked.connect(self.dosya_ac)
         self.kaydet.clicked.connect(self.dosya_kaydet)
-        self.show()
+
 
     def yaziyi_temizle(self):
         self.yazi_alani.clear()
@@ -44,9 +45,50 @@ class Notepad(QWidget):
             file.write(self.yazi_alani.toPlainText())
 
 
+class Menu(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.pencere = Notepad()
+        self.setCentralWidget(self.pencere)
+        self.menuleri_olustur()
 
+    def menuleri_olustur(self):
+        menubar = self.menuBar()
+        dosya = menubar.addMenu("Dosya")
+
+        dosya_ac = QAction("Dosya Aç",self)
+        dosya_ac.setShortcut("Ctrl+O")
+
+        dosya_kaydet = QAction("Dosya Kaydet",self)
+        dosya_kaydet.setShortcut("Ctrl+S")
+
+        temizle = QAction("Dosyayı Temizle",self)
+        temizle.setShortcut("Ctrl+D")
+
+        cikis = QAction("Çıkış",self)
+        cikis.setShortcut("Ctrl+Q")
+
+        dosya.addAction(dosya_ac)
+        dosya.addAction(dosya_kaydet)
+        dosya.addAction(temizle)
+        dosya.addAction(cikis)
+
+        dosya.triggered.connect(self.response)
+
+        self.setWindowTitle("Metin Editörü")
+        self.show()
+
+    def response(self,action):
+        if action.text() == "Dosya Aç":
+            self.pencere.dosya_ac()
+        elif action.text() == "Dosya Kaydet":
+            self.pencere.dosya_kaydet()
+        elif action.text() == "Dosyayı Temizle":
+            self.pencere.yaziyi_temizle()
+        elif action.text() == "Çıkış":
+            qApp.quit()
 
 
 app = QApplication(sys.argv)
-notepad = Notepad()
+menu = Menu()
 sys.exit(app.exec_())
